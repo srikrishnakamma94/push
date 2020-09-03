@@ -28,7 +28,7 @@
 
         function unsubscribeUser() {
             let sw = await navigator.serviceWorker.ready;
-            sw.pushManager.getSubscription()
+            let push = sw.pushManager.getSubscription()
                 .then(function (subscription) {
                     return subscription.unsubscribe();
                 })
