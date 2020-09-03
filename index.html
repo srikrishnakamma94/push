@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Push Notification</title>
+</head>
+
+<body>
+
+    <button onclick="subscribe()"> Subscribe </button>
+
+    <script>
+
+        addEventListener('load', async () => {
+            unsubscribeUser();
+            let sw = await navigator.serviceWorker.register('./sw.js');
+            console.log(sw);
+        });
+
+        async function subscribe() {
+            let sw = await navigator.serviceWorker.ready;
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: 'BCEkP_01nxhWAO3qnETusk2RXHW3cIPz6qSQJoUhDMkLwTugCuKLfES_i9LFei7alUakDGRQvEZXaQTMaQIRxdc'
+            });
+            console.log(JSON.stringify(push));
+        }
+
+        function unsubscribeUser() {
+            swRegistration.pushManager.getSubscription()
+                .then(function (subscription) {
+                    return subscription.unsubscribe();
+                })
+                .catch(function (error) {
+                    console.log('Error unsubscribing', error);
+                })
+                .then(function () {
+                    console.log('User is unsubscribed.');
+                });
+        }
+    </script>
+</body>
+
+</html>
