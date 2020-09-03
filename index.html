@@ -12,8 +12,8 @@
     <script>
 
         addEventListener('load', async () => {
-            unsubscribeUser();
             let sw = await navigator.serviceWorker.register('./sw.js');
+            unsubscribeUser(sw);
             console.log(sw);
         });
 
@@ -26,8 +26,7 @@
             console.log(JSON.stringify(push));
         }
 
-        function unsubscribeUser() {
-            let sw = await navigator.serviceWorker.ready;
+        function unsubscribeUser(sw) {
             let push = sw.pushManager.getSubscription()
                 .then(function (subscription) {
                     return subscription.unsubscribe();
