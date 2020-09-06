@@ -38,11 +38,12 @@
         }
 
         async function register() {
-            sw = await navigator.serviceWorker.register('./sw.js');
+            let sw = await navigator.serviceWorker.register('./sw.js');
             console.log(sw);
         }
 
         async function unrigister() {
+            let sw = await navigator.serviceWorker.ready;
             if (sw) {
                 sw.unregister().then(function (flag) {
                     if (flag) {
