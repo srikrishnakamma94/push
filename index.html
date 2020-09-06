@@ -10,13 +10,13 @@
     <button onclick="subscribe()"> Subscribe </button>
 
     <script>
-        var sw;
+    
         addEventListener('load', async () => {
             register();
         });
 
         async function subscribe() {
-            sw = await navigator.serviceWorker.ready;
+            let sw = await navigator.serviceWorker.ready;
             let push = await sw.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: 'BDve_VdZQq36tdNR0BIbogIoxPEuHoDXCBPx13KMvv1mnuqP38uCScx5qGy-BsUj7ApJC9DWzuk_yY6wyy0_hLA'
@@ -25,7 +25,8 @@
         }
 
         async function unsubscribe() {
-            await sw.pushManager.unsubscribe().then(function (flag) {
+            let sw = await navigator.serviceWorker.ready;
+            let unsub = await sw.pushManager.unsubscribe().then(function (flag) {
                 if (flag) {
                     console.log("unsubscribe success");
                     unrigister();
@@ -35,12 +36,12 @@
             });
         }
 
-        function rigister() {
+        async function rigister() {
             sw = await navigator.serviceWorker.register('./sw.js');
             console.log(sw);
         }
 
-        function unrigister() {
+        async function unrigister() {
             if (sw) {
                 sw.unregister().then(function (flag) {
                     if (flag) {
