@@ -10,22 +10,48 @@
     <button onclick="subscribe()"> Subscribe </button>
 
     <script>
-
+        var sw;
         addEventListener('load', async () => {
-            let sw = await navigator.serviceWorker.register('./sw.js');
-            console.log(sw);
+            register();
         });
 
         async function subscribe() {
-            let sw = await navigator.serviceWorker.ready;
+            sw = await navigator.serviceWorker.ready;
             let push = await sw.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: 'BDve_VdZQq36tdNR0BIbogIoxPEuHoDXCBPx13KMvv1mnuqP38uCScx5qGy-BsUj7ApJC9DWzuk_yY6wyy0_hLA'
             });
             console.log(JSON.stringify(push));
         }
-    </script>
 
+        async function unsubscribe() {
+            await sw.pushManager.unsubscribe().then(function (flag) {
+                if (flag) {
+                    console.log("unsubscribe success");
+                    unrigister();
+                } else {
+                    console.log("unsubscribe faild");
+                }
+            });
+        }
+
+        function rigister() {
+            sw = await navigator.serviceWorker.register('./sw.js');
+            console.log(sw);
+        }
+
+        function unrigister() {
+            if (sw) {
+                sw.unregister().then(function (flag) {
+                    if (flag) {
+                        console.log("unrigister success");
+                    } else {
+                        console.log("unrigister faild");
+                    }
+                });
+            };
+        }
+    </script>
 </body>
 
 </html>
