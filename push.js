@@ -1,19 +1,17 @@
 var push = require('web-push')
 
+//let vapidkeys = push.generateVAPIDKeys();
+
+//console.log(vapidkeys);
+
 let vapidkeys = {
-  publicKey: 'BE-g3Au9t4CyQMyXQVAeuwqdSsPClMqPAJdTtsmXKvC208lIuuVzTc-uOo7h3Q74pJZNuDdjxBe9r9A8MIaai_w',
-  privateKey: 'DFYPBJhByHL93xxU6KAmwdBiOd9Ax5jM_aAZBupwkO0'
+  publicKey: 'BDve_VdZQq36tdNR0BIbogIoxPEuHoDXCBPx13KMvv1mnuqP38uCScx5qGy-BsUj7ApJC9DWzuk_yY6wyy0_hLA',
+  privateKey: 'K7nvExf0zL_y9Jgo6Y4NX04PWGB96Xa-nw2RB5qMAXM'
 }
+
 
 push.setVapidDetails("mailto:srikrishnakamma@outlook.com", vapidkeys.publicKey, vapidkeys.privateKey)
 
-let sub = {
-  "endpoint": "https://fcm.googleapis.com/fcm/send/cdoWHzbuzxk:APA91bGABTsqWJUUfnCL1TZQq_vrQH9bdZmn_fjnS2eMRYGWKCuJkF0XCk47R3GMrhxyCoGuAhWpXQJGElXp1yO2mK7NUwkjTpeUuOoCznl3s8neiE_bOAv21uzazvOQh0zDrbYHUxPZ",
-  "expirationTime": null,
-  "keys": {
-    "p256dh": "BCEkP_01nxhWAO3qnETusk2RXHW3cIPz6qSQJoUhDMkLwTugCuKLfES_i9LFei7alUakDGRQvEZXaQTMaQIRxdc",
-    "auth": "v5ZXyrNVqdpJfmi4mH-XZw"
-  }
-}
+let sub = {"endpoint":"https://fcm.googleapis.com/fcm/send/cSZ_q8l7GMA:APA91bH7vH5EtLJIR8TpXON9AZ-4EPBMgiMfB8gQmsGdB7VnXmpc_t1lScZvpDHUV1Q3nNHNLK-V0JzMJoJ-ZH_ybm10lseo7mKA8ZG56oPJrvEUO3pkOaqiwUmrViX3I5g1SQbLwY3m","expirationTime":null,"keys":{"p256dh":"BBbUMbUeDwnXs2k2yRsfoULMCC25ES31i53S5t2e8Q3H8Ab2oQHrHWllSD5zqd0di5sEtQlANKOK84Sh3Y746gg","auth":"ZsmmXAONJ6e0TC-IDNJNwQ"}}
 
 push.sendNotification(sub, 'test message');
