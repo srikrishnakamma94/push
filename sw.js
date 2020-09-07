@@ -39,7 +39,7 @@ self.addEventListener('notificationclick', function (event) {
   // See: http://crbug.com/463146
   event.notification.close();
 
-  let sw = await navigator.serviceWorker.ready;
+  let sw = navigator.serviceWorker.ready;
   sw.controller.postMessage({title: 'Send message from client'})
   // This looks to see if the current is already open and
   // focuses if it is
