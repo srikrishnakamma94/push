@@ -12,9 +12,19 @@
 
     <script>
 
+
+        function test() {
+            alert('test');
+        }
+
         addEventListener('load', async () => {
             register();
         });
+
+        async function register() {
+            let sw = await navigator.serviceWorker.register('./sw.js');
+            console.log(sw);
+        }
 
         async function subscribe() {
             let sw = await navigator.serviceWorker.ready;
@@ -39,11 +49,6 @@
                 }).then(function () {
                     unrigister();
                 });
-        }
-
-        async function register() {
-            let sw = await navigator.serviceWorker.register('./sw.js');
-            console.log(sw);
         }
 
         async function unrigister() {
