@@ -1,10 +1,10 @@
 
 self.addEventListener('install', event => {
-    console.log('Service worker installing...');
+  console.log('Service worker installing...');
 });
 
 self.addEventListener('activate', event => {
-    console.log('Service worker activating...');
+  console.log('Service worker activating...');
 });
 
 self.addEventListener('push', event => {
@@ -17,14 +17,43 @@ self.addEventListener('push', event => {
       primaryKey: 1
     },
     actions: [
-      {action: 'explore', title: 'Go to the site',
-        icon: 'images/checkmark.png'},
-      {action: 'close', title: 'Close the notification',
-        icon: 'images/xmark.png'},
+      {
+        action: 'explore', title: 'Go to the site',
+        icon: 'images/checkmark.png'
+      },
+      {
+        action: 'close', title: 'Close the notification',
+        icon: 'images/xmark.png'
+      },
     ]
   };
 
   event.waitUntil(
     self.registration.showNotification('Push Notification', options)
+  );
+});
+
+self.addEventListener('notificationclick', function (event) {
+  console.log('On notification click: ', event.notification.tag);
+  // Android doesn't close the notification when you click on it
+  // See: http://crbug.com/463146
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(
+    clients.matchAll({
+      type: "window"
+    })
+      .then(function (clientList) {
+        for (var i = 0; i < clientList.length; i++) {
+          var client = clientList[i];
+          if (client.url == '/' && 'focus' in client)
+            return client.focus();
+        }
+        if (clients.openWindow) {
+          return clients.openWindow('/');
+        }
+      })
   );
 });
