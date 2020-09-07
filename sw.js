@@ -1,10 +1,10 @@
 
 self.addEventListener('install', event => {
-  console.log('Service worker installing...');
+
 });
 
 self.addEventListener('activate', event => {
-  console.log('Service worker activating...');
+
 });
 
 self.addEventListener('push', event => {
@@ -35,6 +35,7 @@ self.addEventListener('push', event => {
 
 self.addEventListener('notificationclick', function (event) {
   console.log('On notification click: ', event.notification.tag);
+
   // Android doesn't close the notification when you click on it
   // See: http://crbug.com/463146
   event.notification.close();
@@ -65,6 +66,4 @@ self.addEventListener('notificationclick', function (event) {
 self.addEventListener('notificationclose', function (e) {
   var notification = e.notification;
   var primaryKey = notification.data.primaryKey;
-
-  console.log('Closed notification: ' + primaryKey);
 });
