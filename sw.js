@@ -39,6 +39,7 @@ self.addEventListener('notificationclick', function (event) {
   // See: http://crbug.com/463146
   event.notification.close();
   
+  // test function
   test();
 
   // This looks to see if the current is already open and
