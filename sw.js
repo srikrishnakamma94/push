@@ -40,7 +40,7 @@ self.addEventListener('notificationclick', function (event) {
   event.notification.close();
   
   // test function
-  test();
+  self.test();
 
   // This looks to see if the current is already open and
   // focuses if it is
