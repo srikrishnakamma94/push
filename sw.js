@@ -39,8 +39,10 @@ self.addEventListener('notificationclick', function (event) {
   // See: http://crbug.com/463146
   event.notification.close();
 
-  let sw = navigator.serviceWorker.ready;
-  sw.controller.postMessage({title: 'Send message from client'})
+
+  const channel = new BroadcastChannel('sw-messages');
+  channel.postMessage({ title: 'Hello from SW' });
+
   // This looks to see if the current is already open and
   // focuses if it is
   event.waitUntil(
